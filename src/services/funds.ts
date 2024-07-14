@@ -11,4 +11,24 @@ const getFunds = async () => {
   }
 };
 
-export { getFunds };
+const subscribe = async (data: { fund_id: string }) => {
+  try {
+    const response = await api.post(`/funds/subscribe`, data);
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+};
+
+const unsubscribe = async ({ fund_id }: { fund_id: string }) => {
+  try {
+    const response = await api.put(`/funds/unsubscribe/${fund_id}`);
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+};
+
+export { getFunds, subscribe, unsubscribe };

@@ -10,6 +10,7 @@ import { isActive } from "../../../utils";
 
 // Location
 import { useLocation } from "react-router-dom";
+import { CurrentAmount } from "../../user";
 
 const DrawerList = () => {
   const theme = useTheme();
@@ -23,6 +24,7 @@ const DrawerList = () => {
         height: "100%",
       }}
     >
+      <CurrentAmount />
       {drawerData.map(({ path, title, icon }, index) => (
         <Box key={index}>
           <Link to={path}>

@@ -42,7 +42,7 @@ const Funds = () => {
           Fondos
         </Typography>
       </Box>
-      <Divider sx={{ mb: 2 }} />
+      <Divider sx={{ mb: 2, mt: 1 }} />
       {funds.length > 0 && (
         <EnhancedTable
           rows={parseFundsData(funds)}

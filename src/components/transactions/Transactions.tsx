@@ -47,7 +47,7 @@ const Transactions = () => {
           Transacciones
         </Typography>
       </Box>
-      <Divider sx={{ mb: 2 }} />
+      <Divider sx={{ mb: 2, mt: 1 }} />
       {transactions.length > 0 && (
         <EnhancedTable
           rows={parseTransactionData(transactions)}
