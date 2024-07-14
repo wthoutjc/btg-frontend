@@ -1,5 +1,4 @@
-import Chip from "@mui/material/Chip";
-import Typography from "@mui/material/Typography";
+import { Chip, Typography } from "@mui/material";
 
 // Interfaces
 import { Transaction, TransactionType } from "../interfaces";

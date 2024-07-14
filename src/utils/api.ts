@@ -27,7 +27,9 @@ api.interceptors.response.use(
       useUIStore.getState().newAlert({
         id: "error",
         severity: "error",
-        message: `Error ${error.response.status}: ${error.response.data.detail}`,
+        message: `Error ${error.response.status}: ${
+          error.response.data.detail || error.response.data.errors[0]
+        }`,
       });
     }
     return Promise.reject(error);

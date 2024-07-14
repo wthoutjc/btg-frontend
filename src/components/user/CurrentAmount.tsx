@@ -1,15 +1,23 @@
-// Services
 import { useEffect, useState } from "react";
-import { getUser } from "../../services/user";
-import { User } from "../../libs";
 import { Card, CardHeader } from "@mui/material";
 
+// Interfaces
+import { User } from "../../libs";
+
+// Services
+import { getUser } from "../../services/user";
+
+// Zustand
+import { useUIStore } from "../../zustand/store";
+
 const CurrentAmount = () => {
+  const { alerts } = useUIStore();
+
   const [user, setUser] = useState<User | null>(null);
 
   useEffect(() => {
     getUser().then((user) => setUser(user));
-  }, []);
+  }, [alerts]);
 
   return (
     <>

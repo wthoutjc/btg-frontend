@@ -25,7 +25,7 @@ import { REQUIRED_MESSAGE } from "../../libs/constants/required";
 import { getFunds, subscribe, unsubscribe } from "../../services";
 
 // Interfaces
-import { Fund } from "../../libs";
+import { Fund, Transaction } from "../../libs";
 
 // Zustand
 import { useUIStore } from "../../zustand/store";
@@ -46,23 +46,35 @@ const HandleTransaction = ({ mode }: Props) => {
     reset,
   } = useForm<{
     fund_id: string;
-  }>();
+  }>({
+    defaultValues: {
+      fund_id: "Seleccionar",
+    },
+  });
 
   useEffect(() => {
     getFunds().then((funds) => setFunds(funds));
   }, []);
 
+  const handleTransaction = (transaction: Transaction | null) => {
+    if (transaction) {
+      newAlert({
+        id: "",
+        severity: "success",
+        message:
+          mode === ModeTransaction.SUBSCRIBE
+            ? "Suscripción exitosa"
+            : "Cancelación exitosa",
+      });
+    }
+
+    reset();
+  };
+
   const onSubmit = (data: { fund_id: string }) => {
     mode === ModeTransaction.SUBSCRIBE
-      ? subscribe(data).then(() => {
-          newAlert({
-            id: "",
-            severity: "success",
-            message: "Cliente borrado satisfactoriamente",
-          });
-          reset();
-        })
-      : unsubscribe(data).then(() => reset());
+      ? subscribe(data).then((res) => handleTransaction(res))
+      : unsubscribe(data).then((res) => handleTransaction(res));
   };
 
   return (
@@ -119,8 +131,8 @@ const HandleTransaction = ({ mode }: Props) => {
           <MenuItem disabled value="Seleccionar">
             Seleccionar
           </MenuItem>
-          {funds.map(({ _id, name }) => (
-            <MenuItem value={_id}>{name}</MenuItem>
+          {funds.map(({ id, name }) => (
+            <MenuItem value={id}>{name}</MenuItem>
           ))}
         </TextField>
 
