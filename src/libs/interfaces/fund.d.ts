@@ -1,6 +1,7 @@
 export interface Fund {
-  id: ID;
-  name: Name;
+  _id: string;
+  name: string;
   minimum_amount: number;
-  category: Category;
+  category: string;
+  created_at: Date;
 }

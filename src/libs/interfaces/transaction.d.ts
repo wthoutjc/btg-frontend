@@ -1,23 +1,21 @@
-import { Fund } from "./fund";
-
 export interface Transaction {
   id: string;
-  fund: Fund;
+  fund: TransactionFund;
   amount: number;
   transaction_type: TransactionType;
   created_at: Date;
 }
 
+export interface TransactionFund {
+  id: string;
+  name: string;
+  minimum_amount: number;
+  category: Category;
+}
+
 export enum Category {
-  Fpv = "FPV",
-}
-
-export enum ID {
-  The66920Eaf7E3E6860Db7D1923 = "66920eaf7e3e6860db7d1923",
-}
-
-export enum Name {
-  FpvBtgPactualRecaudadora = "FPV_BTG_PACTUAL_RECAUDADORA",
+  FPV = "FPV",
+  FIC = "FIC",
 }
 
 export enum TransactionType {

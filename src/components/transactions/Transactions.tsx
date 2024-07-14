@@ -7,11 +7,15 @@ import AssessmentIcon from "@mui/icons-material/Assessment";
 // Interfaces
 import { Transaction } from "../../libs/interfaces/transaction";
 
-// Services
-import { getTransactions } from "../../services/transactions";
+// UI
 import { EnhancedTable } from "../ui";
-import { parseTransactionData } from "../../libs/parsers/parse-transactions";
+
+// Dictionaries
 import { transactionsDict } from "./TransactionsDict";
+
+// Services, Parsers and Actions
+import { getTransactions } from "../../services/transactions";
+import { parseTransactionData } from "../../libs/parsers/parse-transactions";
 import { TableActions } from "../../libs";
 
 const actions: TableActions[] = [TableActions.read];
@@ -24,10 +28,6 @@ const Transactions = () => {
       setTransactions(transactions)
     );
   }, []);
-
-  useEffect(() => {
-    console.log(transactions);
-  }, [transactions]);
 
   return (
     <Box
