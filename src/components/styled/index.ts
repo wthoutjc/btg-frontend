@@ -8,3 +8,4 @@ export * from "./StyledTable/StyledSkeletonTableRow";
 export * from "./StyledTable/StyledTableHead";
 export * from "./StyledTable/StyledTableRow";
 export * from "./StyledTable/StyledToolbar";
+export * from "./index";

@@ -1,4 +1,3 @@
-"use client";
 import { styled } from "@mui/system";
 import { TableHead } from "@mui/material";
 

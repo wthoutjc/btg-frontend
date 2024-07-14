@@ -1,4 +1,3 @@
-"use client";
 import { styled } from "@mui/system";
 import { IconButton } from "@mui/material";
 

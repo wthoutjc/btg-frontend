@@ -1,19 +1,23 @@
-// import { useTheme } from "@mui/material";
+import { useTheme } from "@mui/material";
 import {
   Breadcrumbs as MUIBreadcrumbs,
-  // Typography,
-  // capitalize,
+  Typography,
+  capitalize,
 } from "@mui/material";
 
 // Icons
-// import HomeIcon from "@mui/icons-material/Home";
+import HomeIcon from "@mui/icons-material/Home";
+
+// Location
+import { Link, useLocation } from "react-router-dom";
 
 const Breadcrumbs = () => {
-  // const theme = useTheme();
+  const theme = useTheme();
+  const { pathname } = useLocation();
 
   return (
-    <MUIBreadcrumbs separator="›">
-      {/* {pathname === "/" && (
+    <MUIBreadcrumbs separator="›" sx={{ mb: 2 }}>
+      {pathname === "/" && (
         <Typography
           variant="caption"
           sx={{
@@ -29,8 +33,8 @@ const Breadcrumbs = () => {
             }}
           />
         </Typography>
-      )} */}
-      {/* {pathname !== "/" &&
+      )}
+      {pathname !== "/" &&
         pathname.split("/").map((path, index) =>
           index + 1 === pathname.split("/").length ? (
             <Typography
@@ -43,23 +47,23 @@ const Breadcrumbs = () => {
               {capitalize(path)}
             </Typography>
           ) : (
-            // <Link key={path + index} href={`/${path}`}>
-            // </Link>
-            <Typography variant="caption">
-              {path.length === 0 ? (
-                <HomeIcon
-                  fontSize="small"
-                  sx={{
-                    display: "flex",
-                    width: "1rem",
-                  }}
-                />
-              ) : (
-                capitalize(path)
-              )}
-            </Typography>
+            <Link key={path + index} to={`/${path}`}>
+              <Typography variant="caption">
+                {path.length === 0 ? (
+                  <HomeIcon
+                    fontSize="small"
+                    sx={{
+                      display: "flex",
+                      width: "1rem",
+                    }}
+                  />
+                ) : (
+                  capitalize(path)
+                )}
+              </Typography>
+            </Link>
           )
-        )} */}
+        )}
     </MUIBreadcrumbs>
   );
 };

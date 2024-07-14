@@ -1,10 +1,8 @@
-// import { useState } from "react";
 import {
-  // IconButton,
-  // Tooltip,
+  IconButton,
+  Tooltip,
   useTheme,
   Box,
-  // Collapse,
   List,
   ListItem,
 } from "@mui/material";
@@ -12,17 +10,15 @@ import {
 // Components
 import { drawerData } from "./DrawerData";
 
-// Icons
-// import ExpandLess from "@mui/icons-material/ExpandLess";
-// import ExpandMore from "@mui/icons-material/ExpandMore";
-
 // Utils
-// import { isActive } from "../../../utils";
+import { isActive } from "../../../utils";
+
+// Location
+import { Link, useLocation } from "react-router-dom";
 
 const DrawerListClosed = () => {
   const theme = useTheme();
-
-  // const [openNested, setOpenNested] = useState(false);
+  const { pathname } = useLocation();
 
   return (
     <List
@@ -32,19 +28,14 @@ const DrawerListClosed = () => {
         height: "100%",
       }}
     >
-      {drawerData.map(({ nested }, index) =>
-        nested && nested.length > 0 ? (
-          <Box key={index}>
+      {drawerData.map(({ path, title, icon }, index) => (
+        <Box key={index}>
+          <Link to={path}>
             <ListItem disablePadding>
-              {/* <Tooltip title={title}>
+              <Tooltip title={title}>
                 <IconButton
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    setOpenNested(!openNested);
-                  }}
                   sx={{
-                    mb: 0,
-                    flexDirection: "column",
+                    mb: 1,
                     backgroundColor: isActive(path, pathname)
                       ? theme.palette.secondary.light
                       : "transparent",
@@ -52,58 +43,12 @@ const DrawerListClosed = () => {
                   }}
                 >
                   {icon}
-                  {openNested ? (
-                    <ExpandLess fontSize="small" />
-                  ) : (
-                    <ExpandMore fontSize="small" />
-                  )}
                 </IconButton>
-              </Tooltip> */}
+              </Tooltip>
             </ListItem>
-            {/* <Collapse in={openNested} timeout="auto" unmountOnExit>
-              {nested.map(({ icon, path, title }, i) => (
-                <Link key={`nested-${index}-${i}`} href={path} passHref>
-                  <ListItem sx={{ pt: 0 }} disablePadding>
-                    <Tooltip title={title}>
-                      <IconButton
-                        sx={{
-                          mt: 0,
-                          backgroundColor: isActive(path, pathname)
-                            ? theme.palette.secondary.light
-                            : "transparent",
-                          borderRadius: 1.5,
-                        }}
-                      >
-                        {icon}
-                      </IconButton>
-                    </Tooltip>
-                  </ListItem>
-                </Link>
-              ))}
-            </Collapse> */}
-          </Box>
-        ) : (
-          <Box key={index}>
-            {/* <Link href={path} passHref>
-              <ListItem disablePadding>
-                <Tooltip title={title}>
-                  <IconButton
-                    sx={{
-                      mb: 1,
-                      backgroundColor: isActive(path, pathname)
-                        ? theme.palette.secondary.light
-                        : "transparent",
-                      borderRadius: 1.5,
-                    }}
-                  >
-                    {icon}
-                  </IconButton>
-                </Tooltip>
-              </ListItem>
-            </Link> */}
-          </Box>
-        )
-      )}
+          </Link>
+        </Box>
+      ))}
     </List>
   );
 };

@@ -26,7 +26,6 @@ export * from "./ui/Drawer/ToggleDrawer";
 export * from "./ui/Loaders/GeneralLoader";
 export { default as Table } from "./ui/Table/Table";
 export { default as TableError } from "./ui/Table/TableError";
-export * from "./ui/Table/TableFilters";
 export * from "./ui/Table/TableHead";
 export * from "./ui/Table/TablePagination";
 export { default as TableSkeleton } from "./ui/Table/TableSkeleton";

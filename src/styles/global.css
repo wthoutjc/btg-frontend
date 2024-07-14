@@ -3,3 +3,8 @@
 * {
   font-family: "Montserrat", sans-serif !important;
 }
+
+#root {
+  display: flex;
+  height: 100vh;
+}

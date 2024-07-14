@@ -1,13 +1,7 @@
-"use client";
-import Box from "@mui/material/Box";
-import FormControl from "@mui/material/FormControl";
-import MenuItem from "@mui/material/MenuItem";
-import Typography from "@mui/material/Typography";
+import { Box, FormControl, MenuItem, Typography } from "@mui/material";
 
 // Components
-import { StyledBox } from "../../../components/styled/StyledBoxes/StyledBox";
-import { StyledSelect } from "../../../components/styled/StyledButtons/StyledSelect";
-import { StyledPagination } from "../../../components/styled/StyledTable/StyledPagination";
+import { StyledBox, StyledSelect, StyledPagination } from "../../../components";
 
 interface Props {
   total: number;

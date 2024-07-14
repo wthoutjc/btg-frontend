@@ -1,11 +1,9 @@
 // Icons
-import GroupIcon from "@mui/icons-material/Group";
-import HomeIcon from "@mui/icons-material/Home";
-import StoreIcon from "@mui/icons-material/Store";
-import PrecisionManufacturingIcon from "@mui/icons-material/PrecisionManufacturing";
-import ContactEmergencyIcon from "@mui/icons-material/ContactEmergency";
-import DocumentScannerIcon from "@mui/icons-material/DocumentScanner";
-import BorderColorIcon from "@mui/icons-material/BorderColor";
+import AssessmentIcon from "@mui/icons-material/Assessment";
+import ArticleIcon from "@mui/icons-material/Article";
+import PersonPinIcon from "@mui/icons-material/PersonPin";
+import UnsubscribeIcon from "@mui/icons-material/Unsubscribe";
+import SubscriptionsIcon from "@mui/icons-material/Subscriptions";
 
 interface DrawerData {
   title: string;
@@ -16,41 +14,29 @@ interface DrawerData {
 
 const drawerData: DrawerData[] = [
   {
-    title: "Inicio",
+    title: "Transacciones",
     path: "/",
-    icon: <HomeIcon fontSize="small" />,
+    icon: <AssessmentIcon fontSize="small" />,
   },
   {
-    title: "Clientes",
-    path: "/clientes",
-    icon: <GroupIcon fontSize="small" />,
+    title: "Fondos",
+    path: "/funds",
+    icon: <ArticleIcon fontSize="small" />,
   },
   {
-    title: "Empresas",
-    path: "/empresas",
-    icon: <StoreIcon fontSize="small" />,
+    title: "Suscribirse",
+    path: "/subscribe",
+    icon: <SubscriptionsIcon fontSize="small" />,
   },
   {
-    title: "Semiautomático",
-    path: "/semi-automatico",
-    icon: <PrecisionManufacturingIcon fontSize="small" />,
-    nested: [
-      {
-        title: "Clientes",
-        path: "/semi-automatico/clientes",
-        icon: <ContactEmergencyIcon fontSize="small" />,
-      },
-      {
-        title: "Items",
-        path: "/semi-automatico/items",
-        icon: <DocumentScannerIcon fontSize="small" />,
-      },
-    ],
+    title: "Cancelar suscripción",
+    path: "/unsubscribe",
+    icon: <UnsubscribeIcon fontSize="small" />,
   },
   {
-    title: "Manual",
-    path: "/manual",
-    icon: <BorderColorIcon fontSize="small" />,
+    title: "Cuenta",
+    path: "/me",
+    icon: <PersonPinIcon fontSize="small" />,
   },
 ];
 

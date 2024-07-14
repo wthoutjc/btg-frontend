@@ -14,10 +14,14 @@ import { useUIStore } from "../../../zustand/store";
 // Components
 import { StyledDrawerHeader } from "../../../components/styled/StyledDrawer/StyledDrawerHeader";
 
+// Images
+import darkLogo from "../../../assets/btg-pactual-dark.png";
+import lightLogo from "../../../assets/btg-pactual-light.png";
+
 const DrawerHead = () => {
   const theme = useTheme();
 
-  const { drawer, setDrawer } = useUIStore((state) => state);
+  const { drawer, setDrawer, darkMode } = useUIStore((state) => state);
   const { open } = drawer;
 
   return (
@@ -30,6 +34,7 @@ const DrawerHead = () => {
       }}
     >
       <ToggleDrawer />
+
       <Typography
         variant="h6"
         sx={{ flexGrow: 1, ml: open ? 1 : 0 }}
@@ -37,7 +42,15 @@ const DrawerHead = () => {
         fontWeight={600}
         textAlign={open ? "left" : "center"}
       >
-        {open ? "VitaApp II" : "V"}
+        {open ? (
+          darkMode ? (
+            <img src={lightLogo} width={100} />
+          ) : (
+            <img src={darkLogo} width={100} />
+          )
+        ) : (
+          "B"
+        )}
       </Typography>
 
       <ToggleButton
