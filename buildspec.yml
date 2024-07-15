@@ -1,12 +1,14 @@
 version: 0.2
 
+env:
+  image: aws/codebuild/standard:4.0
+
 phases:
   install:
     runtime-versions:
       nodejs: 17.9.1
     commands:
       - echo "Install phase"
-      - apk update && apk add jq
       - npm install
   pre_build:
     commands:
