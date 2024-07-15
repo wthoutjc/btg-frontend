@@ -1,6 +1,5 @@
-version 0.2
+version: 0.2
 
-# buildspec.yml for build spa react app deploy to s3 using aws codebuild & cloudformation
 phases:
   install:
     runtime-versions:
