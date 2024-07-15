@@ -14,5 +14,5 @@ phases:
   post_build:
     commands:
       - echo "Post build phase"
-      - aws cloudformation package --template-file template.yml --s3-bucket btg-frontend --output-template-file outputtemplate.yml
+      - aws cloudformation package --template-file template.yaml --s3-bucket btg-frontend --output-template-file outputtemplate.yml
       - aws cloudformation deploy --template-file outputtemplate.yml --stack-name btg-frontend --capabilities CAPABILITY_IAM
