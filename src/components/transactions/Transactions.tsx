@@ -14,7 +14,7 @@ import { EnhancedTable } from "../ui";
 import { transactionsDict } from "./TransactionsDict";
 
 // Services, Parsers and Actions
-import { getTransactions } from "../../services/transactions";
+import { getTransactions, getUser } from "../../services";
 import { parseTransactionData } from "../../libs/parsers/parse-transactions";
 import { TableActions } from "../../libs";
 
@@ -24,9 +24,13 @@ const Transactions = () => {
   const [transactions, setTransactions] = useState<Transaction[]>([]);
 
   useEffect(() => {
-    getTransactions("66929eabd09004fc87693968").then((transactions) =>
-      setTransactions(transactions)
-    );
+    getUser().then((user) => {
+      if (!user) return;
+
+      getTransactions(user._id).then((transactions) =>
+        setTransactions(transactions)
+      );
+    });
   }, []);
 
   return (

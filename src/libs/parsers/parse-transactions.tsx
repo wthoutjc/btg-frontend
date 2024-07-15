@@ -9,6 +9,7 @@ import ErrorIcon from "@mui/icons-material/Error";
 
 // Dayjs
 import dayjs from "dayjs";
+import { currencyFormatThousands } from "../../utils/currency-format";
 
 const parseTransactionData = (data: Transaction[]) => {
   return data.map((item) => {
@@ -16,6 +17,7 @@ const parseTransactionData = (data: Transaction[]) => {
 
     return {
       ...rest,
+      amount: currencyFormatThousands(item.amount),
       fund: fund.name,
       created_at: dayjs(item.created_at).format("DD/MM/YYYY HH:mm:ss"),
       transaction_type: (

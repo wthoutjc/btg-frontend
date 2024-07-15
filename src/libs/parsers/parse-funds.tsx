@@ -5,6 +5,7 @@ import { Fund, TransactionType } from "../interfaces";
 // Icons
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import ErrorIcon from "@mui/icons-material/Error";
+import { currencyFormatThousands } from "../../utils/currency-format";
 
 const parseFundsData = (data: Fund[]) => {
   return data.map((item) => {
@@ -14,6 +15,7 @@ const parseFundsData = (data: Fund[]) => {
 
     return {
       ...rest,
+      minimum_amount: currencyFormatThousands(item.minimum_amount),
       status: (
         <Chip
           size="small"

@@ -24,6 +24,7 @@ import { getUser } from "../../services/user";
 // Zustand
 import { useUIStore } from "../../zustand/store";
 import { UpdateNotification } from "./UpdateNotification";
+import { currencyFormatThousands } from "../../utils/currency-format";
 
 const User = () => {
   const { setDialog, alerts } = useUIStore();
@@ -74,7 +75,7 @@ const User = () => {
             <Box sx={{ mb: 3 }}>
               <Typography variant="body2">Saldo actual: </Typography>
               <Typography variant="body2" fontWeight={600}>
-                {user.amount}
+                {currencyFormatThousands(user.amount)}
               </Typography>
             </Box>
 
