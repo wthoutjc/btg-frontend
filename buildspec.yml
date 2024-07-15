@@ -19,25 +19,29 @@ phases:
       - aws cloudformation deploy --template-file outputtemplate.yml --stack-name btg-frontend --capabilities CAPABILITY_IAM
 
  Resources:
-  SPABTGFrontendBucket:
+  ReactAppBucket:
     Type: AWS::S3::Bucket
     Properties:
-      BucketName: !Ref SPABTGFrontendBucketName
+      BucketName: btg-frontend
+      AccessControl: PublicRead
+      WebsiteConfiguration:
+        IndexDocument: index.html
+        ErrorDocument: index.html
 
-  SPABTGFrontendBucketPolicy:
+  BucketPolicy:
     Type: AWS::S3::BucketPolicy
     Properties:
-      Bucket: !Ref SPABTGFrontendBucket
+      Bucket: !Ref ReactAppBucket
       PolicyDocument:
+        Version: '2012-10-17'
         Statement:
-          - Effect: Allow
-            Principal: "*"
-            Action: "s3:GetObject"
-            Resource: !Sub "arn:aws:s3:::${SPABTGFrontendBucketName}/*"
+          - Sid: PublicReadGetObject
+            Effect: Allow
+            Principal: '*'
+            Action: 's3:GetObject'
+            Resource: !Sub 'arn:aws:s3:::btg-frontend-bucket/*'
 
-  SPABTGFrontendBucketName:
-    Type: AWS::SSM::Parameter
-    Properties:
-      Name: /SPABTGFrontend/BucketName
-      Type: String
-      Value: !Ref SPABTGFrontendBucket
+Outputs:
+  WebsiteURL:
+    Value: !GetAtt ReactAppBucket.WebsiteURL
+    Description: URL for the website hosted on S3
