@@ -7,9 +7,15 @@ phases:
     commands:
       - echo "Install phase"
       - npm install
+  pre_build:
+    commands:
+      - echo "Pre build phase"
+      - >
+        export VITE_API_URL=$(aws secretsmanager get-secret-value --secret-id prod/btg-frontend --query SecretString --output text | jq -r '.VITE_API_URL')
   build:
     commands:
       - echo "Build phase"
+      - echo "API URL is $VITE_API_URL"
       - npm run build
   post_build:
     commands:
