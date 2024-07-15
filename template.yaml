@@ -2,7 +2,7 @@ Resources:
   BucketPolicy:
     Type: AWS::S3::BucketPolicy
     Properties:
-      Bucket: !Sub "btg-frontend-bucket"
+      Bucket: "btg-frontend-bucket"
       PolicyDocument:
         Version: "2012-10-17"
         Statement:
@@ -10,9 +10,9 @@ Resources:
             Effect: Allow
             Principal: "*"
             Action: "s3:GetObject"
-            Resource: !Sub "arn:aws:s3:::btg-frontend-bucket/*"
+            Resource: "arn:aws:s3:::btg-frontend-bucket/*"
 
 Outputs:
   WebsiteURL:
-    Value: !Sub "http://${btg-frontend-bucket}.s3-website-${AWS::Region}.amazonaws.com"
+    Value: "http://btg-frontend-bucket.s3-website-sa-east-1.amazonaws.com"
     Description: URL for the website hosted on S3
