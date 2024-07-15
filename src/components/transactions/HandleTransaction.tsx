@@ -66,9 +66,11 @@ const HandleTransaction = ({ mode }: Props) => {
     }
 
     reset();
+    setLoading(false);
   };
 
   const onSubmit = (data: { fund_id: string }) => {
+    setLoading(true);
     mode === ModeTransaction.SUBSCRIBE
       ? subscribe(data).then((res) => handleTransaction(res))
       : unsubscribe(data).then((res) => handleTransaction(res));
