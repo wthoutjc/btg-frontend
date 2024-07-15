@@ -26,4 +26,6 @@ phases:
       - echo "Post build phase"
       - aws s3 sync dist/ s3://btg-frontend-bucket --delete
       - aws cloudformation package --template-file template.yaml --s3-bucket btg-frontend --output-template-file outputtemplate.yml
-      - aws cloudformation deploy --template-file outputtemplate.yml --stack-name btg-frontend --capabilities CAPABILITY_IAM
+      - |
+        aws cloudformation deploy --template-file outputtemplate.yml --stack-name btg-frontend --capabilities CAPABILITY_IAM || \
+        if [ $? -eq 255 ]; then echo "No changes to deploy. Stack btg-frontend is up to date."; else exit 1; fi
