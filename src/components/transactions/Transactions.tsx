@@ -54,6 +54,7 @@ const Transactions = () => {
           dict={transactionsDict}
           actions={actions}
           total={20}
+          readonly
         />
       )}
     </Box>

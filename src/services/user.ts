@@ -11,4 +11,14 @@ const getUser = async () => {
   }
 };
 
-export { getUser };
+const updateUser = async (user: User) => {
+  try {
+    const response = await api.put<User>(`/user/${user._id}`, user);
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+};
+
+export { getUser, updateUser };
