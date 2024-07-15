@@ -11,11 +11,11 @@ phases:
     commands:
       - echo "Pre build phase"
       - >
-        export VITE_API_URL=$(aws secretsmanager get-secret-value --secret-id prod/btg-frontend --query SecretString --output text | jq -r '.VITE_API_URL')
+        export VITE_BACKEND_URL=$(aws secretsmanager get-secret-value --secret-id arn:aws:secretsmanager:sa-east-1:393455371269:secret:prod/btg-frontend-h6qpnS --query SecretString --output text)
   build:
     commands:
       - echo "Build phase"
-      - echo "API URL is $VITE_API_URL"
+      - echo "API URL is $VITE_BACKEND_URL"
       - npm run build
   post_build:
     commands:
