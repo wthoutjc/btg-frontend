@@ -2,7 +2,7 @@ Resources:
   ReactAppBucket:
     Type: AWS::S3::Bucket
     Properties:
-      BucketName: btg-frontend
+      BucketName: btg-frontend-bucket
       AccessControl: PublicRead
       WebsiteConfiguration:
         IndexDocument: index.html
@@ -19,7 +19,7 @@ Resources:
             Effect: Allow
             Principal: "*"
             Action: "s3:GetObject"
-            Resource: !Sub "arn:aws:s3:::btg-frontend/*"
+            Resource: !Sub "arn:aws:s3:::btg-frontend-bucket/*"
 
 Outputs:
   WebsiteURL:
