@@ -1,17 +1,8 @@
 Resources:
-  ReactAppBucket:
-    Type: AWS::S3::Bucket
-    Properties:
-      BucketName: btg-frontend-bucket
-      AccessControl: PublicRead
-      WebsiteConfiguration:
-        IndexDocument: index.html
-        ErrorDocument: index.html
-
   BucketPolicy:
     Type: AWS::S3::BucketPolicy
     Properties:
-      Bucket: !Ref ReactAppBucket
+      Bucket: !Sub "btg-frontend-bucket"
       PolicyDocument:
         Version: "2012-10-17"
         Statement:
@@ -23,5 +14,5 @@ Resources:
 
 Outputs:
   WebsiteURL:
-    Value: !GetAtt ReactAppBucket.WebsiteURL
+    Value: !Sub "http://${btg-frontend-bucket}.s3-website-${AWS::Region}.amazonaws.com"
     Description: URL for the website hosted on S3
