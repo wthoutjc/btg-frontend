@@ -1,7 +1,6 @@
 export * from "./Alerts/Alert";
 export * from "./Alerts/Alerts";
 export * from "./Breadcrumbs/Breadcrumbs";
-export * from "./CircularProgress/CircularProgress";
 export * from "./Dialog/Dialog";
 export * from "./Drawer/Drawer";
 export * from "./Drawer/DrawerData";

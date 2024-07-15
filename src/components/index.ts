@@ -15,7 +15,6 @@ export * from "./transactions";
 export * from "./ui/Alerts/Alert";
 export * from "./ui/Alerts/Alerts";
 export * from "./ui/Breadcrumbs/Breadcrumbs";
-export * from "./ui/CircularProgress/CircularProgress";
 export * from "./ui/Dialog/Dialog";
 export * from "./ui/Drawer/Drawer";
 export * from "./ui/Drawer/DrawerData";

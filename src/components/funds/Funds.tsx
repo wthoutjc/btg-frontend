@@ -8,7 +8,7 @@ import ArticleIcon from "@mui/icons-material/Article";
 import { Fund } from "../../libs";
 
 // UI
-import { EnhancedTable } from "../ui";
+import { EnhancedTable, TableSkeleton } from "../ui";
 
 // Dictionaries
 import { fundsDict } from "./FundsDict";
@@ -18,10 +18,14 @@ import { getFunds } from "../../services";
 import { parseFundsData } from "../../libs/parsers/parse-funds";
 
 const Funds = () => {
+  const [loading, setLoading] = useState(true);
   const [funds, setFunds] = useState<Fund[]>([]);
 
   useEffect(() => {
-    getFunds().then((funds) => setFunds(funds));
+    getFunds().then((funds) => {
+      setFunds(funds);
+      setLoading(false);
+    });
   }, []);
 
   return (
@@ -43,6 +47,8 @@ const Funds = () => {
         </Typography>
       </Box>
       <Divider sx={{ mb: 2, mt: 1 }} />
+      {loading && <TableSkeleton />}
+
       {funds.length > 0 && (
         <EnhancedTable
           rows={parseFundsData(funds)}

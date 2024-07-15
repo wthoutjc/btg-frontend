@@ -5,6 +5,7 @@ import {
   CardActions,
   CardContent,
   CardHeader,
+  CircularProgress,
   Divider,
   IconButton,
   Tooltip,
@@ -29,6 +30,7 @@ import { currencyFormatThousands } from "../../utils/currency-format";
 const User = () => {
   const { setDialog, alerts } = useUIStore();
 
+  const [loading, setLoading] = useState(true);
   const [user, setUser] = useState<IUser | null>(null);
 
   const handleUpdate = () => {
@@ -43,7 +45,10 @@ const User = () => {
   };
 
   useEffect(() => {
-    getUser().then((user) => setUser(user));
+    getUser().then((user) => {
+      setUser(user);
+      setLoading(false);
+    });
   }, [alerts]);
 
   return (
@@ -65,6 +70,7 @@ const User = () => {
         </Typography>
       </Box>
       <Divider sx={{ mb: 2, mt: 1 }} />
+      {loading && <CircularProgress />}
       {user && (
         <Card>
           <CardHeader

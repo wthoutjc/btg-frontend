@@ -35,6 +35,7 @@ interface Props {
 }
 
 const HandleTransaction = ({ mode }: Props) => {
+  const [loading, setLoading] = useState(true);
   const [funds, setFunds] = useState<Fund[]>([]);
   const { newAlert } = useUIStore();
 
@@ -51,10 +52,6 @@ const HandleTransaction = ({ mode }: Props) => {
       fund_id: "Seleccionar",
     },
   });
-
-  useEffect(() => {
-    getFunds().then((funds) => setFunds(funds));
-  }, []);
 
   const handleTransaction = (transaction: Transaction | null) => {
     if (transaction) {
@@ -76,6 +73,13 @@ const HandleTransaction = ({ mode }: Props) => {
       ? subscribe(data).then((res) => handleTransaction(res))
       : unsubscribe(data).then((res) => handleTransaction(res));
   };
+
+  useEffect(() => {
+    getFunds().then((funds) => {
+      setFunds(funds);
+      setLoading(false);
+    });
+  }, []);
 
   return (
     <Box
@@ -111,7 +115,7 @@ const HandleTransaction = ({ mode }: Props) => {
           autoComplete="off"
           label={"Fondo"}
           placeholder="Seleccionar"
-          disabled={false}
+          disabled={loading}
           helperText={!!errors.fund_id && errors.fund_id.message}
           error={!!errors.fund_id}
           {...register("fund_id", {
@@ -142,6 +146,7 @@ const HandleTransaction = ({ mode }: Props) => {
           fullWidth
           color={mode === ModeTransaction.SUBSCRIBE ? "primary" : "secondary"}
           onClick={handleSubmit(onSubmit)}
+          disabled={loading}
         >
           {mode === ModeTransaction.SUBSCRIBE
             ? "Suscribirse"

@@ -8,7 +8,7 @@ import AssessmentIcon from "@mui/icons-material/Assessment";
 import { Transaction } from "../../libs/interfaces/transaction";
 
 // UI
-import { EnhancedTable } from "../ui";
+import { EnhancedTable, TableSkeleton } from "../ui";
 
 // Dictionaries
 import { transactionsDict } from "./TransactionsDict";
@@ -21,15 +21,17 @@ import { TableActions } from "../../libs";
 const actions: TableActions[] = [TableActions.read];
 
 const Transactions = () => {
+  const [loading, setLoading] = useState(true);
   const [transactions, setTransactions] = useState<Transaction[]>([]);
 
   useEffect(() => {
     getUser().then((user) => {
       if (!user) return;
 
-      getTransactions(user._id).then((transactions) =>
-        setTransactions(transactions)
-      );
+      getTransactions(user._id).then((transactions) => {
+        setTransactions(transactions);
+        setLoading(false);
+      });
     });
   }, []);
 
@@ -52,6 +54,8 @@ const Transactions = () => {
         </Typography>
       </Box>
       <Divider sx={{ mb: 2, mt: 1 }} />
+      {loading && <TableSkeleton />}
+
       {transactions.length > 0 && (
         <EnhancedTable
           rows={parseTransactionData(transactions)}
