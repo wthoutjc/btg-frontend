@@ -1,0 +1,43 @@
+version 0.2
+
+# buildspec.yml for build spa react app deploy to s3 using aws codebuild & cloudformation
+phases:
+  install:
+    runtime-versions:
+      nodejs: 20
+    commands:
+      - echo "Install phase"
+      - npm install
+  build:
+    commands:
+      - echo "Build phase"
+      - npm run build
+  post_build:
+    commands:
+      - echo "Post build phase"
+      - aws cloudformation package --template-file template.yml --s3-bucket btg-frontend --output-template-file outputtemplate.yml
+      - aws cloudformation deploy --template-file outputtemplate.yml --stack-name btg-frontend --capabilities CAPABILITY_IAM
+
+ Resources:
+  SPABTGFrontendBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Ref SPABTGFrontendBucketName
+
+  SPABTGFrontendBucketPolicy:
+    Type: AWS::S3::BucketPolicy
+    Properties:
+      Bucket: !Ref SPABTGFrontendBucket
+      PolicyDocument:
+        Statement:
+          - Effect: Allow
+            Principal: "*"
+            Action: "s3:GetObject"
+            Resource: !Sub "arn:aws:s3:::${SPABTGFrontendBucketName}/*"
+
+  SPABTGFrontendBucketName:
+    Type: AWS::SSM::Parameter
+    Properties:
+      Name: /SPABTGFrontend/BucketName
+      Type: String
+      Value: !Ref SPABTGFrontendBucket
