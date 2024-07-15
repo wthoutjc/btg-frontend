@@ -1,6 +1,8 @@
 import axios from "axios";
 import { useUIStore } from "../zustand/store";
 
+console.log("Base URL:", import.meta.env.VITE_BACKEND_URL);
+
 const api = axios.create({
   baseURL: import.meta.env.VITE_BACKEND_URL,
 });
