@@ -6,7 +6,7 @@ phases:
       nodejs: 17.9.1
     commands:
       - echo "Install phase"
-      - apt-get update && apt-get install -y jq
+      - apk update && apk add jq
       - npm install
   pre_build:
     commands:
