@@ -1,8 +1,16 @@
+Parameters:
+  CreateBucket:
+    Type: String
+    Default: "false"
+    AllowedValues: ["true", "false"]
+    Description: "Create a new S3 bucket"
+
 Resources:
   MyBucket:
     Type: AWS::S3::Bucket
     Properties:
       BucketName: btg-frontend-bucket-17-7-24
+    Condition: CreateNewBucket
 
   BucketPolicy:
     Type: "AWS::S3::BucketPolicy"
@@ -15,12 +23,7 @@ Resources:
             Principal: "*"
             Action: "s3:GetObject"
             Resource: !Sub "arn:aws:s3:::btg-frontend-bucket-17-7-24/*"
-    Condition: CreateBucketPolicyCondition
+    Condition: CreateNewBucket
 
 Conditions:
-  CreateBucketPolicyCondition: !Equals [!Ref BucketPolicyExists, "true"]
-
-Parameters:
-  BucketPolicyExists:
-    Type: String
-    Default: "true"
+  CreateNewBucket: !Equals [!Ref CreateBucket, "true"]
