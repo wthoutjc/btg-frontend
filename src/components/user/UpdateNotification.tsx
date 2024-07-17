@@ -25,7 +25,7 @@ interface Props {
 }
 
 interface UpdateNotification {
-  notify: "email" | "sms" | "Seleccionar";
+  notify: string;
   value: string;
 }
 
@@ -40,8 +40,8 @@ const UpdateNotification = ({ user }: Props) => {
     reset,
   } = useForm<UpdateNotification>({
     defaultValues: {
-      notify: "Seleccionar",
-      value: "",
+      notify: user.notify.type,
+      value: user.notify.value,
     },
   });
 
