@@ -9,9 +9,6 @@ Resources:
       AccessControl: PublicRead
       WebsiteConfiguration:
         IndexDocument: index.html
-      Tags:
-        - Key: Name
-          Value: "Juan Camilo Ramírez Rátiva"
 
   BucketPolicy:
     Type: AWS::S3::BucketPolicy
