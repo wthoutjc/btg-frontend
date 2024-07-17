@@ -12,7 +12,7 @@ phases:
       - npm install
   pre_build:
     commands:
-      - echo "Pre build phase"
+      - echo "Pre build phase 1"
       - >
         export VITE_BACKEND_URL=$(aws secretsmanager get-secret-value --secret-id arn:aws:secretsmanager:sa-east-1:992382560327:secret:prod/btg-frontend-9jOJQC --query SecretString --output text | jq -r '.VITE_BACKEND_URL')
       - echo "API URL is $VITE_BACKEND_URL"
