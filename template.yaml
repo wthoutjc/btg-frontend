@@ -22,9 +22,6 @@ Resources:
             Principal: "*"
             Action: "s3:GetObject"
             Resource: !Sub "arn:aws:s3:::btg-frontend-bucket/*"
-      Tags:
-        - Key: Name
-          Value: "Juan Camilo Ramírez Rátiva"
 
 Outputs:
   WebsiteURL:
