@@ -24,7 +24,7 @@ phases:
   post_build:
     commands:
       - echo "Post build phase"
-      - aws s3 sync dist/ s3://btg-frontend-bucket --delete
+      - aws s3 sync dist/ s3://btg-frontend-bucket-17-7-24 --delete
       - aws cloudformation package --template-file template.yaml --s3-bucket btg-frontend --output-template-file outputtemplate.yml
       - |
         aws cloudformation deploy --template-file outputtemplate.yml --stack-name btg-frontend --capabilities CAPABILITY_IAM --tags Name="Juan Camilo Ramírez Rátiva" || \
