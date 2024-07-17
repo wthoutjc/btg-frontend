@@ -1,19 +1,8 @@
-AWSTemplateFormatVersion: "2010-09-09"
-Description: Frontend BTG Pactual - FPV Service
-
 Resources:
-  FrontendBucket:
-    Type: AWS::S3::Bucket
-    Properties:
-      BucketName: "btg-frontend-bucket-17-7-24"
-      AccessControl: PublicRead
-      WebsiteConfiguration:
-        IndexDocument: index.html
-
   BucketPolicy:
     Type: AWS::S3::BucketPolicy
     Properties:
-      Bucket: !Ref FrontendBucket
+      Bucket: "btg-frontend-bucket-17-7-24"
       PolicyDocument:
         Version: "2012-10-17"
         Statement:
@@ -21,9 +10,9 @@ Resources:
             Effect: Allow
             Principal: "*"
             Action: "s3:GetObject"
-            Resource: !Sub "arn:aws:s3:::btg-frontend-bucket-17-7-24/*"
+            Resource: "arn:aws:s3:::btg-frontend-bucket-17-7-24/*"
 
 Outputs:
   WebsiteURL:
-    Value: !GetAtt FrontendBucket.WebsiteURL
+    Value: "http://btg-frontend-bucket-17-7-24.s3-website-sa-east-1.amazonaws.com"
     Description: URL for the website hosted on S3
