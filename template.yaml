@@ -1,8 +1,22 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: Frontend BTG Pactual - FPV Service
+
 Resources:
+  FrontendBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: "btg-frontend-bucket"
+      AccessControl: PublicRead
+      WebsiteConfiguration:
+        IndexDocument: index.html
+      Tags:
+        - Key: Name
+          Value: "Juan Camilo Ramírez Rátiva"
+
   BucketPolicy:
     Type: AWS::S3::BucketPolicy
     Properties:
-      Bucket: "btg-frontend-bucket"
+      Bucket: !Ref FrontendBucket
       PolicyDocument:
         Version: "2012-10-17"
         Statement:
@@ -10,9 +24,17 @@ Resources:
             Effect: Allow
             Principal: "*"
             Action: "s3:GetObject"
-            Resource: "arn:aws:s3:::btg-frontend-bucket/*"
+            Resource: !Sub "arn:aws:s3:::btg-frontend-bucket/*"
+      Tags:
+        - Key: Name
+          Value: "Juan Camilo Ramírez Rátiva"
 
 Outputs:
   WebsiteURL:
-    Value: "http://btg-frontend-bucket.s3-website-sa-east-1.amazonaws.com"
+    Value: !GetAtt FrontendBucket.WebsiteURL
     Description: URL for the website hosted on S3
+    Export:
+      Name: WebsiteURL
+      Tags:
+        - Key: Name
+          Value: "Juan Camilo Ramírez Rátiva"
