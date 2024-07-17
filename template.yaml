@@ -5,7 +5,7 @@ Resources:
   FrontendBucket:
     Type: AWS::S3::Bucket
     Properties:
-      BucketName: "btg-frontend-bucket"
+      BucketName: "btg-frontend-bucket-17-7-24"
       AccessControl: PublicRead
       WebsiteConfiguration:
         IndexDocument: index.html
@@ -21,14 +21,9 @@ Resources:
             Effect: Allow
             Principal: "*"
             Action: "s3:GetObject"
-            Resource: !Sub "arn:aws:s3:::btg-frontend-bucket/*"
+            Resource: !Sub "arn:aws:s3:::btg-frontend-bucket-17-7-24/*"
 
 Outputs:
   WebsiteURL:
     Value: !GetAtt FrontendBucket.WebsiteURL
     Description: URL for the website hosted on S3
-    Export:
-      Name: WebsiteURL
-      Tags:
-        - Key: Name
-          Value: "Juan Camilo Ramírez Rátiva"
