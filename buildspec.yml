@@ -14,7 +14,7 @@ phases:
     commands:
       - echo "Pre build phase"
       - >
-        export VITE_BACKEND_URL=$(aws secretsmanager get-secret-value --secret-id arn:aws:secretsmanager:sa-east-1:393455371269:secret:prod/btg-frontend-h6qpnS --query SecretString --output text | jq -r '.VITE_BACKEND_URL')
+        export VITE_BACKEND_URL=$(aws secretsmanager get-secret-value --secret-id arn:aws:secretsmanager:sa-east-1:992382560327:secret:prod/btg-frontend-9jOJQC --query SecretString --output text | jq -r '.VITE_BACKEND_URL')
       - echo "API URL is $VITE_BACKEND_URL"
   build:
     commands:
