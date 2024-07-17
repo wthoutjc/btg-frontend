@@ -1,18 +1,5 @@
 Resources:
-  BucketPolicy:
-    Type: AWS::S3::BucketPolicy
+  MyBucket:
+    Type: AWS::S3::Bucket
     Properties:
-      Bucket: "btg-frontend-bucket-17-7-24"
-      PolicyDocument:
-        Version: "2012-10-17"
-        Statement:
-          - Sid: PublicReadGetObject
-            Effect: Allow
-            Principal: "*"
-            Action: "s3:GetObject"
-            Resource: "arn:aws:s3:::btg-frontend-bucket-17-7-24/*"
-
-Outputs:
-  WebsiteURL:
-    Value: "http://btg-frontend-bucket-17-7-24.s3-website-sa-east-1.amazonaws.com"
-    Description: URL for the website hosted on S3
+      BucketName: btg-frontend-bucket-17-7-24
