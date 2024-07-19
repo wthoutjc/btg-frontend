@@ -11,7 +11,7 @@ const getFunds = async () => {
   }
 };
 
-const subscribe = async (data: { fund_id: string }) => {
+const subscribe = async (data: { fund_id: string; amount: number }) => {
   try {
     const response = await api.post<Transaction>(`/funds/subscribe`, data);
     return response.data;

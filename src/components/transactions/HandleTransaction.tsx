@@ -14,6 +14,7 @@ import { ModeTransaction } from "../../libs/enums";
 import UnsubscribeIcon from "@mui/icons-material/Unsubscribe";
 import SubscriptionsIcon from "@mui/icons-material/Subscriptions";
 import ArticleIcon from "@mui/icons-material/Article";
+import PaidIcon from "@mui/icons-material/Paid";
 
 // React Hook Form
 import { useForm } from "react-hook-form";
@@ -47,6 +48,7 @@ const HandleTransaction = ({ mode }: Props) => {
     reset,
   } = useForm<{
     fund_id: string;
+    amount: number;
   }>({
     defaultValues: {
       fund_id: "Seleccionar",
@@ -69,7 +71,7 @@ const HandleTransaction = ({ mode }: Props) => {
     setLoading(false);
   };
 
-  const onSubmit = (data: { fund_id: string }) => {
+  const onSubmit = (data: { fund_id: string; amount: number }) => {
     setLoading(true);
     mode === ModeTransaction.SUBSCRIBE
       ? subscribe(data).then((res) => handleTransaction(res))
@@ -119,6 +121,7 @@ const HandleTransaction = ({ mode }: Props) => {
           placeholder="Seleccionar"
           disabled={loading}
           helperText={!!errors.fund_id && errors.fund_id.message}
+          sx={{ mb: 2 }}
           error={!!errors.fund_id}
           {...register("fund_id", {
             required: REQUIRED_MESSAGE,
@@ -141,6 +144,33 @@ const HandleTransaction = ({ mode }: Props) => {
             <MenuItem value={id}>{name}</MenuItem>
           ))}
         </TextField>
+
+        {mode === ModeTransaction.SUBSCRIBE && (
+          <TextField
+            fullWidth
+            required
+            type="number"
+            autoComplete="off"
+            label={"Monto"}
+            placeholder="Ej: 250000"
+            disabled={loading}
+            helperText={!!errors.amount && errors.amount.message}
+            error={!!errors.amount}
+            {...register("amount", {
+              required: REQUIRED_MESSAGE,
+              validate: (value) =>
+                value <= 0 ? "El monto debe ser mayor a 0" : undefined,
+            })}
+            value={watch("amount")}
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <PaidIcon />
+                </InputAdornment>
+              ),
+            }}
+          />
+        )}
 
         <Button
           sx={{ mt: 2 }}
